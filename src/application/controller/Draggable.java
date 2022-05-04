@@ -1,5 +1,7 @@
-package application;
-
+package application.controller;
+/*
+ * This is the Draggable class which allows the cards to be dragged from the user's hand into the discard pile
+ */
 import javafx.scene.Node;
 
 public class Draggable {

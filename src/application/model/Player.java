@@ -1,6 +1,7 @@
-package application;
+package application.model;
 
-import application.Card.Color;
+import application.Main;
+import application.model.Card.Color;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,7 +31,9 @@ public class Player{
     displayH = null;
   }
 
-  
+  public Deck getDeck() {
+    return hand;
+  }
 
   /**
     * adds specifiied card to players hand. 
@@ -52,37 +55,42 @@ public class Player{
   {
     hand.removeCard(card);
   }
+
+  public Card drawCard() {
+    if (hand.size() >= HAND_LIMIT) {
+      return null;
+    }
+    Card d = Main.gameLoop.drawCardFromPile();
+    addCard(d);
+    return d;
+  }
   
   //perfromMove will take in the top card of the discard deck and the index of the card the player is trying to play
   //check if the card is valid, and removes card. Returns null if it doesn't match. (throws Exception so surround in try/catch)
   public boolean performMove(Card cardPlayed) {
-    //TODO delete this line
-    System.out.println(hand.size());
       if (!isValid(cardPlayed)) {
-        System.out.println("Move is not valid");
         return false;
       }
       //TODO check for UNO called
+      Main.gameLoop.setTopCard(cardPlayed);
       removeCard(cardPlayed);
-      Deck.topCard = cardPlayed;
       if (hand.isEmpty()) {
         // assign self as winner
         Main.gameLoop.setWinner(this);
       }
-      //TODO delete this line
-      System.out.println(hand.size());
+      GameLoop.turnNum++;
       return true;
   }
   
   //helper function for checking valid matches
   public boolean isValid(Card card) {
-    if (card.getCardColor() == Color.WILD) {
-      // Wild card always accepatable
+    // if (card.getCardColor() == Color.WILD) {
+    //   // Wild card always accepatable
+    //   return true;
+    // }
+    if (card.getCardColor() == Deck.topCard.getCardColor())
       return true;
-    }
-    if (card.getCardColor() == GameLoop.topCard.getCardColor())
-      return true;
-    if (card.getCardValue() == GameLoop.topCard.getCardValue()) {
+    if (card.getCardValue() == Deck.topCard.getCardValue()) {
       return true;
     }
     // else
@@ -93,7 +101,7 @@ public class Player{
   //canMove will take in the top card of the discard pile and check with all the players cards to see if that player
   //can actually play something (so the game doesn't brick up) if they can't play, a card will be added to hand or if
   //the hand is full a card will be discarded and the turn is skipped
-  public boolean canMove(Card cardInPlay) {
+  public boolean canMove() {
 	  for(int i = 0; i < hand.size()-1; i++) {
 		  if(isValid(hand.get(i))) {
 			  return true;

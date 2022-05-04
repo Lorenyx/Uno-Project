@@ -1,8 +1,19 @@
-package application;
+package application.controller;
 
+import application.Main;
+import application.model.Card;
+import application.model.Deck;
+import application.model.GameLoop;
+import application.model.Player;
+/* The BoardController class controllers the main Uno game scene
+ * it shows the human player their hand of cards by dynamically loading each card separately
+ * it also allows the human player to select their discard card by clicking and it will be moved into the discard pile
+ * this class also shows the number of cards in the CPU's hand at anytime 
+ */
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
@@ -54,12 +65,14 @@ public class BoardController {
 	private Button yellowButton;
 	@FXML
 	private Button unoButton;
+	@FXML
+	private Label gameOverLabel;
 	
 	
 	//Gets the original X and Y Layout of the players Cards
 	//Needed for making sure moving pieces can go back to original places when needed
 	public void initialize() {
-
+		gameOverLabel.setVisible(false);
 		// Set opposite displays to correct rotation
 		cpu2HandDisplay.setRotate(180);
 		cpu3HandDisplay.setRotate(180);
@@ -97,8 +110,7 @@ public class BoardController {
 	}
 
 	public void setTopCardImage() {
-		Image img = new Image(getClass().getResource(GameLoop.topCard.toFileName()).toExternalForm());
-		System.out.println(topCard.getId());
+		Image img = new Image(getClass().getResource(Deck.topCard.toFileName()).toExternalForm());
 		topCard.setImage(img);
 	}
 
@@ -124,7 +136,7 @@ public class BoardController {
 		return iv;
 	}
 	private ImageView cardToImageH() {
-		Image img = new Image(getClass().getResource("data/UNO_FRONT.PNG").toExternalForm());
+		Image img = new Image(getClass().getResource("../data/UNO_FRONT.PNG").toExternalForm());
 		ImageView iv = new ImageView();
 		iv.setImage(img);
 		iv.setFitWidth(75);
@@ -132,7 +144,7 @@ public class BoardController {
 		return iv;
 	}
 	private ImageView cardToImageV() {
-		Image img = new Image(getClass().getResource("data/UNO_FRONT_VERTICAL.PNG").toExternalForm());
+		Image img = new Image(getClass().getResource("../data/UNO_FRONT_VERTICAL.PNG").toExternalForm());
 		ImageView iv = new ImageView();
 		iv.setImage(img);
 		iv.setFitHeight(75);
@@ -194,8 +206,6 @@ public class BoardController {
 			topCard.setImage(card.getImage());//sets the image of the discard pile to that of the card played
 			card.setImage(null);//sets them image of the card played to null;
 			
-			cardShift();//Call to card shift to shift the cards down when a card is played
-			
 			if(false)//if the card will call on the to string to test in the card name is WILD.jpg
 			{
 				colorSelector();
@@ -221,20 +231,24 @@ public class BoardController {
 				visiblePause.play();
 			}
 		}
-		//Call to fixLayout
-		fixLayout();
 	}
 	
 	public void actionCardPlayed(MouseEvent event) {
 		ImageView iv = (ImageView) event.getSource();
 		Card playedCard = imageToCard(iv);
 		Player p = Main.gameLoop.getPlayer();
-		boolean wasValid = p.performMove(playedCard);
-		if (wasValid) 
+		if (p.performMove(playedCard)) {
 			playerHandDisplay.getChildren().remove(iv);
-		System.out.println("Action Card Played Complete");
+			System.out.println("Entering cycle");
+			Main.gameLoop.cycle();
+		}
 	}
 	
+	public void actionSkipTurn() {
+		Main.gameLoop.turnNum++;
+		Main.gameLoop.cycle();
+	}
+
 	public void onUnoClicked(MouseEvent event) {
 		unoButton.setVisible(false);
 		unoTemp = 0;
@@ -273,94 +287,19 @@ public class BoardController {
 		ImageView cardImage = (ImageView) event.getSource();
 		// Card card = 
 	}
-	public void drawCard(MouseEvent event) {
-		//TODO complete implementing this
-		//sets image of the card drawn from deck will be dynamic after full implementation
-		Image image = new Image(getClass().getResource("data/RED_REVERSE.png").toExternalForm());
-		ImageView card = (ImageView) event.getSource();
-		//Sets the image of the first blank card it finds when the draw card is clicked
-		// if(card1.getImage() == null) {
-		// 	card1.setImage(image);
-		// }
-		// else if(card2.getImage() == null) {
-		// 	card2.setImage(image);
-		// }
-		// else if(card3.getImage() == null) {
-		// 	card3.setImage(image);
-		// }
-		// else if(card4.getImage() == null) {
-		// 	card4.setImage(image);
-		// }
-		// else if(card5.getImage() == null) {
-		// 	card5.setImage(image);
-		// }
-		// else if(card6.getImage() == null) {
-		// 	card6.setImage(image);
-		// }
-		// else if(card7.getImage() == null) {
-		// 	card7.setImage(image);
-		// }
-		
-		//Call to fixLayout
-		fixLayout();
+	public void actionDrawCard(MouseEvent event) {
+		Player p = Main.gameLoop.getPlayer();
+		Card drawn = p.drawCard();
+		addCardToPlayer(drawn);
 		
 	}
 	
-	public void cardShift() {
-				
-				//Shifts the cards down when a card is played so there is no gaps
-				// if(card1.getImage() == null ) {
-				// 	card1.setImage(card2.getImage());
-				// 	card2.setImage(null);
-				// }
-				// if(card2.getImage() == null) {
-				// 	card2.setImage(card3.getImage());
-				// 	card3.setImage(null);
-				// }
-				// if(card3.getImage() == null) {
-				// 	card3.setImage(card4.getImage());
-				// 	card4.setImage(null);
-				// }
-				// if(card4.getImage() == null) {
-				// 	card4.setImage(card5.getImage());
-				// 	card5.setImage(null);
-				// }
-				// if(card5.getImage() == null) {
-				// 	card5.setImage(card6.getImage());
-				// 	card6.setImage(null);
-				// }
-				// if(card6.getImage() == null) {
-				// 	card6.setImage(card7.getImage());
-				// 	card7.setImage(null);
-				// }
-	}
-	
-	//Function is used to keep the layout correct to make sure no bugs mess it up
-	public void fixLayout() {
-		
-		//Sets the cards to the correct position when not being touched
-		// card1.setLayoutX(x1);
-		// card1.setLayoutY(y1);
-		// card2.setLayoutX(x2);
-		// card2.setLayoutY(y2);
-		// card3.setLayoutX(x3);
-		// card3.setLayoutY(y3);
-		// card4.setLayoutX(x4);
-		// card4.setLayoutY(y4);
-		// card5.setLayoutX(x5);
-		// card5.setLayoutY(y5);
-		// card6.setLayoutX(x6);
-		// card6.setLayoutY(y6);
-		// card7.setLayoutX(x7);
-		// card7.setLayoutY(y7);
-		
-		// //Keeps the cards overlapping in the same way
-		// card1.toFront();
-		// card2.toFront();
-		// card3.toFront();
-		// card4.toFront();
-		// card5.toFront();
-		// card6.toFront();
-		// card7.toFront();
+	public void actionAnnounceWinner() {
+		gameOverLabel.setVisible(true);
+		try {
+			Thread.sleep(1000);
+		} catch (Exception E) {
+
+		}
 	}
 }

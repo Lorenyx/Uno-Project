@@ -1,5 +1,8 @@
-package application;
-
+package application.controller;
+/* The MenuController class controllers the main menu scene
+ * It has two buttons: start button and instructions button
+ * They are used to navigate through the menu 
+ */
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -39,7 +42,7 @@ public class MenuCotroller {
     //Loads the game scene when start is clicked on
 	public void onStart(MouseEvent event) {
     	try {
-			Parent root = FXMLLoader.load(getClass().getResource("Board.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Board.fxml"));
 			Scene scene = new Scene(root, 800, 800);
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			
