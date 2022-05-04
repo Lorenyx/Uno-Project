@@ -20,6 +20,10 @@ public class Deck {
         topCard = card;
     }
 
+    public Card get(int index) {
+        return cards.get(index);
+    }
+
     public Card nextCard() {
         Card c = cards.get(0); // get card at front of array
         cards.remove(0); // remove card from ArrayList 

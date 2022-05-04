@@ -91,19 +91,12 @@ public class Player{
   //canMove will take in the top card of the discard pile and check with all the players cards to see if that player
   //can actually play something (so the game doesn't brick up) if they can't play, a card will be added to hand or if
   //the hand is full a card will be discarded and the turn is skipped
-  public boolean canMove(Card cardInPlay)
-  {
-	  boolean res = false;
-	  // for(int i = 0; i < hand.size()-1; i++)
-	  // {
-		//   if(isValid(cardInPlay, hand.get(i)))
-		//   {
-		// 	  res = true;
-		// 	  break;
-		//   }  
-	  // }
-	  return res;
-	  
+  public boolean canMove(Card cardInPlay) {
+	  for(int i = 0; i < hand.size()-1; i++) {
+		  if(isValid(hand.get(i))) {
+			  return true;
+		  }  
+	  }
+	  return false;
   }
-  
 }
