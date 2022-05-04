@@ -1,11 +1,16 @@
 package application;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class Player{
   
   private String name;
   private Deck hand;
   final int HAND_LIMIT = 7;
+  @FXML private VBox displayV;
+  @FXML private HBox displayH;
   
   //constructor for only name
   public Player(String name)
@@ -23,7 +28,8 @@ public class Player{
   {
     if (hand.size() >= HAND_LIMIT ) {
       return false;
-    } /* else */ hand.addCard(c);
+    } /* else */ 
+      hand.addCard(c);
     return true;
   }
   

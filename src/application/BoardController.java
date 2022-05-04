@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -29,7 +30,9 @@ public class BoardController {
 	int unoTemp = 1;
 
 	@FXML 
-	private HBox playerHandDisplay, cpu1HandDisplay, cpu2HandDisplay, cpu3HandDisplay;
+	private HBox playerHandDisplay, cpu2HandDisplay;
+	@FXML
+	private VBox cpu1HandDisplay, cpu3HandDisplay;
 
 	@FXML
 	private ImageView card;
@@ -73,6 +76,9 @@ public class BoardController {
 	//Gets the original X and Y Layout of the players Cards
 	//Needed for making sure moving pieces can go back to original places when needed
 	public void initialize() {
+
+		cpu2HandDisplay.setRotate(180);
+		cpu3HandDisplay.setRotate(180);
 		
 		// x1 = card1.getLayoutX();
 		// y1 = card1.getLayoutY();		
@@ -94,6 +100,27 @@ public class BoardController {
 		addCardToCPU1();
 		addCardToCPU2();
 		addCardToCPU3();
+		addCardToPlayer(rc);
+		addCardToCPU1();
+		addCardToCPU2();
+		addCardToCPU3();
+		addCardToPlayer(rc);
+		addCardToCPU1();
+		addCardToCPU2();
+		addCardToCPU3();
+		addCardToPlayer(rc);
+		addCardToCPU1();
+		addCardToCPU2();
+		addCardToCPU3();
+		addCardToPlayer(rc);
+		addCardToCPU1();
+		addCardToCPU2();
+		addCardToCPU3();
+		addCardToPlayer(rc);
+		addCardToCPU1();
+		addCardToCPU2();
+		addCardToCPU3();
+
 		
 		hoverShadow.setBlurType(BlurType.GAUSSIAN);
 		hoverShadow.setColor(Color.WHITE);
@@ -114,20 +141,20 @@ public class BoardController {
 
 	public void addCardToCPU1() {
 		// Does not check if too many cards have been added
-		ImageView addedCard = cardToImageHidden();
-		addedCard.setRotate(90);
+		ImageView addedCard = cardToImageV();
+		// addedCard.setRotate(90);
 		cpu1HandDisplay.getChildren().add(addedCard);
 	}
 	public void addCardToCPU2() {
 		// Does not check if too many cards have been added
-		ImageView addedCard = cardToImageHidden();
-		addedCard.setRotate(180);
+		ImageView addedCard = cardToImageH();
+		// addedCard.setRotate(180);
 		cpu2HandDisplay.getChildren().add(addedCard);
 	}
 	public void addCardToCPU3() {
 		// Does not check if too many cards have been added
-		ImageView addedCard = cardToImageHidden();
-		addedCard.setRotate(-90);		
+		ImageView addedCard = cardToImageV();
+		// addedCard.setRotate(-90);		
 		cpu3HandDisplay.getChildren().add(addedCard);
 	}
 
@@ -135,16 +162,24 @@ public class BoardController {
 		Image img = new Image(getClass().getResource(C.toFileName()).toExternalForm());
 		ImageView iv = new ImageView();
 		iv.setImage(img);
-		iv.setFitWidth(100);
+		iv.setFitWidth(75);
 		iv.setPreserveRatio(true);
 		return iv;
 	}
 
-	private ImageView cardToImageHidden() {
+	private ImageView cardToImageH() {
 		Image img = new Image(getClass().getResource("data/UNO_FRONT.PNG").toExternalForm());
 		ImageView iv = new ImageView();
 		iv.setImage(img);
-		iv.setFitWidth(100);
+		iv.setFitWidth(75);
+		iv.setPreserveRatio(true);
+		return iv;
+	}
+	private ImageView cardToImageV() {
+		Image img = new Image(getClass().getResource("data/UNO_FRONT_VERTICAL.PNG").toExternalForm());
+		ImageView iv = new ImageView();
+		iv.setImage(img);
+		iv.setFitHeight(75);
 		iv.setPreserveRatio(true);
 		return iv;
 	}

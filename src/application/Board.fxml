@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BoardController">
    <children>
@@ -26,9 +27,10 @@
       <Button fx:id="yellowButton" layoutX="363.0" layoutY="431.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onColorButton" prefHeight="25.0" prefWidth="62.0" text="YELLOW" visible="false" />
       <Button fx:id="greenButton" layoutX="434.0" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onColorButton" prefHeight="25.0" prefWidth="62.0" text="GREEN" visible="false" />
       <Button fx:id="unoButton" layoutX="369.0" layoutY="559.0" mnemonicParsing="false" onMouseClicked="#onUnoClicked" text="UNO" visible="false" />
-      <HBox fx:id="playerHandDisplay" layoutX="161.0" layoutY="609.0" prefHeight="147.0" prefWidth="463.0" />
-      <HBox fx:id="cpu1HandDisplay" layoutX="14.0" layoutY="181.0" prefHeight="354.0" prefWidth="147.0" />
-      <HBox fx:id="cpu3HandDisplay" layoutX="652.0" layoutY="181.0" prefHeight="354.0" prefWidth="147.0" />
-      <HBox fx:id="cpu2HandDisplay" layoutX="168.0" prefHeight="147.0" prefWidth="463.0" />
+      <HBox fx:id="playerHandDisplay" layoutX="153.0" layoutY="640.0" prefHeight="150.0" prefWidth="470.0" />
+      <VBox fx:id="cpu3HandDisplay" layoutX="635.0" layoutY="170.0" prefHeight="470.0" prefWidth="150.0" />
+      <HBox fx:id="cpu2HandDisplay" layoutX="115.0" layoutY="14.0" prefHeight="150.0" prefWidth="570.0" />
+      <VBox fx:id="cpu1HandDisplay" layoutX="14.0" layoutY="196.0" prefHeight="470.0" prefWidth="150.0" />
+      <HBox fx:id="cpu2HandDisplay1" layoutX="125.0" layoutY="24.0" prefHeight="150.0" prefWidth="570.0" />
    </children>
 </AnchorPane>
