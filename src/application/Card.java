@@ -50,7 +50,7 @@ public class Card
 
     //toString 
     public String toString () {
-        return color + "_" + value.ordinal(); // value; //TODO change back
+        return color + "_" + value; 
     }
 
     public String toFileName() {
