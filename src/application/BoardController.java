@@ -35,7 +35,7 @@ public class BoardController {
 	private VBox cpu1HandDisplay, cpu3HandDisplay;
 
 	@FXML
-	private ImageView DiscardPile;
+	private ImageView topCard;
 	@FXML
 	private ImageView deck;
 	@FXML
@@ -55,12 +55,6 @@ public class BoardController {
 	@FXML
 	private Button unoButton;
 	
-	// GAME EVENT VARIABLES
-	private Player currentTurn; //  change to int
-    private Player[] players;
-    private Deck drawPile;
-    private Deck discardPile;
-	
 	
 	//Gets the original X and Y Layout of the players Cards
 	//Needed for making sure moving pieces can go back to original places when needed
@@ -74,40 +68,7 @@ public class BoardController {
 		hoverShadow.setColor(Color.WHITE);
 		hoverShadow.setSpread(.90);
 		// assign gameplay variables
-		drawPile = new Deck(); 
-        drawPile.init();
-        // initialize empty deck
-        discardPile = new Deck(); // after a player moves a card, place it into discard pile
-
-        Player PLAYER = new Player("PLUS ONE");
-        // PLAYER.setDisplay(BoardController.get);
-        AI CPU1 = new AI("CPU1", AI.Difficulty.EASY);
-        AI CPU2 = new AI("CPU2", AI.Difficulty.EASY);
-        AI CPU3 = new AI("CPU3", AI.Difficulty.EASY);
-
-        players = new Player[]{PLAYER, CPU1, CPU2, CPU3};
-        drawPile.shuffle(); // shuffle deck of cards
-        // Hand out 7 cards to each player
-        for (int i=0; i<7; i++) {
-            for (int j=0; j<4; j++) {
-                Card c = drawPile.drawCard(); // pull card off top of deck
-                players[j].addCard(c); //  add card to players hand
-                switch (j) {
-					case 0: // player
-						addCardToPlayer(c);
-					break;
-					case 1:
-						addCardToCPU1();
-					break;
-					case 2:
-						addCardToCPU2();
-					break;
-					case 3:
-						addCardToCPU3();
-					break;
-				}
-            }
-        }
+		Main.gameLoop = new GameLoop(this);
 	}
 	
 	public void addCardToPlayer(Card C) {
@@ -133,6 +94,12 @@ public class BoardController {
 		ImageView addedCard = cardToImageV();
 		// addedCard.setRotate(-90);		
 		cpu3HandDisplay.getChildren().add(addedCard);
+	}
+
+	public void setTopCardImage() {
+		Image img = new Image(getClass().getResource(GameLoop.topCard.toFileName()).toExternalForm());
+		System.out.println(topCard.getId());
+		topCard.setImage(img);
 	}
 
 	private ImageView cardToImage(Card C) {
@@ -180,7 +147,7 @@ public class BoardController {
 		temp = card.getLayoutX();
 		
 		//Test if the card is touching the discard pile
-		if(!(card.getBoundsInParent().intersects(DiscardPile.getBoundsInParent()))) {
+		if(!(card.getBoundsInParent().intersects(topCard.getBoundsInParent()))) {
 			//Used to create outline effect for the card being hovered over
 
 		
@@ -197,7 +164,7 @@ public class BoardController {
 		ImageView card = (ImageView) event.getSource();
 		
 		//Test if the card is touching the discard pile
-		if((card.intersects(DiscardPile.getBoundsInLocal()))) {
+		if((card.intersects(topCard.getBoundsInLocal()))) {
 			//Gets rid of outline effect on card 
 			card.setEffect(null);
 			//sets card back to original position if the card is not played
@@ -209,9 +176,9 @@ public class BoardController {
 	public void cardDropped(MouseEvent event) {
 		//Test if the card is touching the discard pile and if the image on the card is blank
 		ImageView card = (ImageView) event.getSource();
-		if(card.getBoundsInParent().intersects(DiscardPile.getBoundsInParent()) && (card.getImage() != null)) {
+		if(card.getBoundsInParent().intersects(topCard.getBoundsInParent()) && (card.getImage() != null)) {
 			
-			DiscardPile.setImage(card.getImage());//sets the image of the discard pile to that of the card played
+			topCard.setImage(card.getImage());//sets the image of the discard pile to that of the card played
 			card.setImage(null);//sets them image of the card played to null;
 			
 			cardShift();//Call to card shift to shift the cards down when a card is played
@@ -252,7 +219,7 @@ public class BoardController {
 	}
 	
 	public void colorSelector() {
-		DiscardPile.setEffect(blur);
+		topCard.setEffect(blur);
 		deck.setEffect(blur);
 		drawButton.setEffect(blur);
 		
@@ -266,7 +233,7 @@ public class BoardController {
 	public void onColorButton(MouseEvent event) {
 		Button colorButton = (Button) event.getSource();
 		
-		DiscardPile.setEffect(null);
+		topCard.setEffect(null);
 		deck.setEffect(null);
 		drawButton.setEffect(null);
 		

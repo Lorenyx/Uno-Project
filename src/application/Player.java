@@ -1,5 +1,6 @@
 package application;
 
+import application.Card.Color;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -72,13 +73,18 @@ public class Player{
   }
   
   //helper function for checking valid matches
-  public boolean isValid(Card c, Card d)
-  {
-    // //TODO delete getType because special cards are representated as nums
-	  // if(c.getType().equals(d.getType()) || c.getColor().equals(d.getColor()) || c.getNum() == d.getNum())
-		//   return true;
-	  // else
-		  return false;
+  public boolean isValid(Card card) {
+    if (card.getCardColor() == Color.WILD) {
+      // Wild card always accepatable
+      return true;
+    }
+    if (card.getCardColor() == GameLoop.topCard.getCardColor())
+      return true;
+    if (card.getCardValue() == GameLoop.topCard.getCardValue()) {
+      return true;
+    }
+    // else
+    return false;
   }
   
   //***Will be performed at the start of the turn before the player even tries to pick a card***

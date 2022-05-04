@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BoardController">
    <children>
-      <ImageView fx:id="DiscardPile" fitHeight="147.0" fitWidth="102.0" layoutX="398.0" layoutY="317.0" pickOnBounds="true">
+      <ImageView fx:id="topCard" fitHeight="147.0" fitWidth="102.0" layoutX="398.0" layoutY="317.0" pickOnBounds="true">
          <image>
             <Image url="@data/UNO_FRONT.png" />
          </image>
