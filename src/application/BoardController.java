@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -25,6 +27,9 @@ public class BoardController {
 	private double x1, x2, x3, x4, x5, x6,x7;
 	private double y1, y2, y3, y4, y5, y6,y7;
 	int unoTemp = 1;
+
+	@FXML 
+	private HBox playerHandDisplay, cpu1HandDisplay, cpu2HandDisplay, cpu3HandDisplay;
 
 	@FXML
 	private ImageView card;
@@ -69,20 +74,26 @@ public class BoardController {
 	//Needed for making sure moving pieces can go back to original places when needed
 	public void initialize() {
 		
-		x1 = card1.getLayoutX();
-		y1 = card1.getLayoutY();		
-		x2 = card2.getLayoutX();
-		y2 = card2.getLayoutY();
-		x3 = card3.getLayoutX();
-		y3 = card3.getLayoutY();
-		x4 = card4.getLayoutX();
-		y4 = card4.getLayoutY();
-		x5 = card5.getLayoutX();
-		y5 = card5.getLayoutY();
-		x6 = card6.getLayoutX();
-		y6 = card6.getLayoutY();
-		x7 = card7.getLayoutX();
-		y7 = card7.getLayoutY();
+		// x1 = card1.getLayoutX();
+		// y1 = card1.getLayoutY();		
+		// x2 = card2.getLayoutX();
+		// y2 = card2.getLayoutY();
+		// x3 = card3.getLayoutX();
+		// y3 = card3.getLayoutY();
+		// x4 = card4.getLayoutX();
+		// y4 = card4.getLayoutY();
+		// x5 = card5.getLayoutX();
+		// y5 = card5.getLayoutY();
+		// x6 = card6.getLayoutX();
+		// y6 = card6.getLayoutY();
+		// x7 = card7.getLayoutX();
+		// y7 = card7.getLayoutY();
+		Card rc = new Card(Card.Color.GREEN, Card.Value.FIVE);
+		System.out.println(rc.toFileName());
+		addCardToPlayer(rc);
+		addCardToCPU1();
+		addCardToCPU2();
+		addCardToCPU3();
 		
 		hoverShadow.setBlurType(BlurType.GAUSSIAN);
 		hoverShadow.setColor(Color.WHITE);
@@ -95,6 +106,49 @@ public class BoardController {
 		}
 	}
 	
+	public void addCardToPlayer(Card C) {
+		// Does not check if too many cards have been added
+		ImageView addedCard = cardToImage(C);
+		playerHandDisplay.getChildren().add(addedCard);
+	}
+
+	public void addCardToCPU1() {
+		// Does not check if too many cards have been added
+		ImageView addedCard = cardToImageHidden();
+		addedCard.setRotate(90);
+		cpu1HandDisplay.getChildren().add(addedCard);
+	}
+	public void addCardToCPU2() {
+		// Does not check if too many cards have been added
+		ImageView addedCard = cardToImageHidden();
+		addedCard.setRotate(180);
+		cpu2HandDisplay.getChildren().add(addedCard);
+	}
+	public void addCardToCPU3() {
+		// Does not check if too many cards have been added
+		ImageView addedCard = cardToImageHidden();
+		addedCard.setRotate(-90);
+		cpu3HandDisplay.getChildren().add(addedCard);
+	}
+
+	private ImageView cardToImage(Card C) {
+		Image img = new Image(getClass().getResource(C.toFileName()).toExternalForm());
+		ImageView iv = new ImageView();
+		iv.setImage(img);
+		iv.setFitWidth(100);
+		iv.setPreserveRatio(true);
+		return iv;
+	}
+
+	private ImageView cardToImageHidden() {
+		Image img = new Image(getClass().getResource("data/UNO_FRONT.PNG").toExternalForm());
+		ImageView iv = new ImageView();
+		iv.setImage(img);
+		iv.setFitWidth(100);
+		iv.setPreserveRatio(true);
+		return iv;
+	}
+
 	public void onCardHover(MouseEvent event) {
 		//Creates image view object that is loaded with the information of the card being hovered over
 		card = (ImageView) event.getSource();
