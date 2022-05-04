@@ -1,85 +1,108 @@
 package application;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+// import java.util.Random;
 
 public class Deck {
-	private ArrayList<Card> cardList;
+/*
+ *The Deck class contains 108 Uno cards  
+ */
+	private ArrayList<Card> cards;
+	static Card topCard;
 	
-	public Deck()
-	{
-		this.cardList = new ArrayList<Card>();
+	public Deck () {
+		cards = new ArrayList<>();
 	}
-	public void fillDeck() //default fillDeck method, fills the deck with the base 108 cards, essentially the setter
+
+    public void setTopCard(Card card) {
+        // Should be called after a card is played
+        topCard = card;
+    }
+
+    public Card nextCard() {
+        Card c = cards.get(0); // get card at front of array
+        cards.remove(0); // remove card from ArrayList 
+        return c;
+    }
+
+    public Card drawCard() {
+        return nextCard();
+    }
+	
+    public Card peekCard() {
+        return cards.get(0); // get card at front of array
+    }
+
+    public void addCard(Card c) {
+        cards.add(c);
+    }
+
+    public void removeCard(Card c) {
+        // may need a try/catch
+        cards.remove(c);
+    }
+
+	//initializes the deck and resets it
+	public void init() //default fillDeck method, fills the deck with the base 108 cards, essentially the setter
 	{
-		for(int currColor = 0; currColor < 8; currColor++)
+		Card.Color[] colors = Card.Color.values();
+		// cardsInDeck = 0;
+		
+		for(int i = 0; i < colors.length-1; i++) 
 		{
-			for(int faceValue = 0; faceValue < 13; faceValue++)
+			Card.Color color = colors[i];
+			
+			cards.add( new Card(color, Card.Value.getValue(0))); //gets the 1 one card
+			
+			for (int j = 1; j < 10; j++) 
+			{									//gets the rest of the number cards twice
+				cards.add( new Card(color, Card.Value.getValue(j)));
+				cards.add( new Card(color, Card.Value.getValue(j)));
+			}
+			
+			Card.Value[] values = new Card.Value[] {Card.Value.DRAW2, Card.Value.SKIP, Card.Value.REVERSE}; //gets the draw2, skip, and reverse cards twice
+			for(Card.Value value : values)
 			{
-				if(currColor >= 4 && faceValue == 0) //this if statement is used to omit 4 zeros from the final deck
-					faceValue++;
-				switch(currColor) {
-				case 0:
-				case 4:
-					this.cardList.add(new Card(faceValue,"RED"));
-					break;
-				case 1:
-				case 5:
-					this.cardList.add(new Card(faceValue,"YELLOW"));
-					break;
-				case 2:
-				case 6:
-					this.cardList.add(new Card(faceValue,"GREEN"));
-					break;
-				case 3:
-				case 7:
-					this.cardList.add(new Card(faceValue,"BLUE"));
-					break;
-				}
+				cards.add( new Card(color, value));
+				cards.add( new Card(color, value));
 			}
 		}
-		for(int i = 0; i < 8; i++)
-		{
-			if(i>3)
-				this.cardList.add(new Card(13, "BLACK"));
-			else
-				this.cardList.add(new Card(14,"BLACK"));
-		}
+		
+        Card.Value[] values = new Card.Value[] {Card.Value.WILD, Card.Value.WILD4}; //gets wild and wild+4 four times
+        for(Card.Value value : values)
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                cards.add( new Card(Card.Color.WILD, value));
+            }
+        }
 	}
-	public void fillDeck(ArrayList<Card> deck)//fillDeck overload, fills the deck with the given ArrayList of cards (used when reshuffling the discard pile)
-	{
-		if(!this.cardList.isEmpty()) //if the deck isn't empty...
-		{
-			System.out.println("Deck is not empty!"); //...print warning, then return
-			return;
-		}
-		this.cardList = (ArrayList<Card>) deck.clone(); //Unchecked cast shouldn't be a problem as the values of Card Objects shouldn't be changed during gameplay
-	}
-	public void shuffle()
-	{
-		Collections.shuffle(this.getDeck()); //shuffle method using Collections.shuffle, more intuitive than just calling Collections.shuffle(Deck.getDeck()) every time
-	}
-	public ArrayList<Card> getDeck() //cardList getter, not sure if necessary
-	{
-		return this.cardList;
-	}
-	public Card drawCard()
-	{
-		if(this.cardList.isEmpty()) //if cardList is empty, we can't draw a card...
-		{
-			System.out.println("Deck is empty, cannot draw"); //...so we don't
-			return null;
-		}
-		return this.cardList.remove(0);
-	}
-	public String toString()
-	{
-		String ret = "";
-		for(int i = 1; i <= this.getDeck().size(); i++)//starts at 1 so the formatting using modulo works at the first index
-		{
-			ret+=this.cardList.get(i-1);
-			if(i%13 == 0)//if i started at 0, the first card printed would be on its own line (don't want that)
-				ret+=("\n");
-		}
-		return ret;
-	}
+
+    public void replaceDeckWith(ArrayList<Card> cards) {
+        this.cards = cards;
+    }
+
+    public boolean isEmpty(){
+        return cards.isEmpty();
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
+    public void shuffle() {
+        Collections.shuffle(cards);
+        // int n = cards.size();
+        // Random random = new Random();
+        
+        // for(int i = 0; i < cards.size(); i++) {
+        //     int randomValue = i + random.nextInt(n - 1);
+        //     Card randomCard = cards.get(randomValue);
+        //     cards.set(randomValue, cards.get(i));
+        //     cards.set(i, randomCard);
+        // }
+    }
+			
 }
+
