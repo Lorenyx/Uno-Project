@@ -55,21 +55,23 @@ public class Player{
   
   //perfromMove will take in the top card of the discard deck and the index of the card the player is trying to play
   //check if the card is valid, and removes card. Returns null if it doesn't match. (throws Exception so surround in try/catch)
-  public Card performMove(Card cardInPlay, int indexOfPlayerCard) throws Exception
-  {
-      // Card cardInQuestion = hand.get(indexOfPlayerCard);
-      
-      // if(isValid(cardInPlay, cardInQuestion))
-      // {
-    	//   Card c = hand.remove(indexOfPlayerCard);
-    	//   return c;
-      // }
-      // else
-      // {
-    	//   System.out.println("Invalid match");
-    	//   return null;
-      // }
-      return null;
+  public boolean performMove(Card cardPlayed) {
+    //TODO delete this line
+    System.out.println(hand.size());
+      if (!isValid(cardPlayed)) {
+        System.out.println("Move is not valid");
+        return false;
+      }
+      //TODO check for UNO called
+      removeCard(cardPlayed);
+      Deck.topCard = cardPlayed;
+      if (hand.isEmpty()) {
+        // assign self as winner
+        Main.gameLoop.setWinner(this);
+      }
+      //TODO delete this line
+      System.out.println(hand.size());
+      return true;
   }
   
   //helper function for checking valid matches

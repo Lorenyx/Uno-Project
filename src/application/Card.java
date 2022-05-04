@@ -56,4 +56,8 @@ public class Card
     public String toFileName() {
         return "data/" +toString()+ ".png";
     }
+
+    public boolean equals(Card c) {
+        return (this.color == c.color) && (this.value == c.value);
+    }
 }

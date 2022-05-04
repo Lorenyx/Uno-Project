@@ -44,7 +44,12 @@ public class Deck {
 
     public void removeCard(Card c) {
         // may need a try/catch
-        cards.remove(c);
+        for (Card d : cards) {
+            if (c.equals(d)) {
+                cards.remove(d);
+                return;
+            }
+        }
     }
 
 	//initializes the deck and resets it

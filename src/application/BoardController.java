@@ -118,9 +118,11 @@ public class BoardController {
 		iv.setOnMouseReleased((MouseEvent ent) -> {
 			cardDropped(ent);
 		});
+		iv.setOnMouseClicked((MouseEvent ent) -> {
+			actionCardPlayed(ent);
+		});
 		return iv;
 	}
-
 	private ImageView cardToImageH() {
 		Image img = new Image(getClass().getResource("data/UNO_FRONT.PNG").toExternalForm());
 		ImageView iv = new ImageView();
@@ -138,6 +140,17 @@ public class BoardController {
 		return iv;
 	}
 
+	private Card imageToCard(ImageView iv) {
+		String fileName = iv.getImage().getUrl();
+		String lines[] = fileName.split("/");
+		String baseName = lines[lines.length - 1];
+		lines = baseName.split("_");
+		String colorStr = lines[0];
+		String valueStr = lines[1].substring(0, lines[1].lastIndexOf(".png"));
+		Card.Color color = Card.Color.valueOf(colorStr);
+		Card.Value value = Card.Value.valueOf(valueStr);
+		return new Card(color, value);
+	}
 	public void onCardHover(MouseEvent event) {
 		//Creates image view object that is loaded with the information of the card being hovered over
 		ImageView card = (ImageView) event.getSource();
@@ -212,6 +225,15 @@ public class BoardController {
 		fixLayout();
 	}
 	
+	public void actionCardPlayed(MouseEvent event) {
+		ImageView iv = (ImageView) event.getSource();
+		Card playedCard = imageToCard(iv);
+		Player p = Main.gameLoop.getPlayer();
+		boolean wasValid = p.performMove(playedCard);
+		if (wasValid) 
+			playerHandDisplay.getChildren().remove(iv);
+		System.out.println("Action Card Played Complete");
+	}
 	
 	public void onUnoClicked(MouseEvent event) {
 		unoButton.setVisible(false);
@@ -247,6 +269,10 @@ public class BoardController {
 		
 	}
 	
+	public void onCardPlayer(MouseEvent event) {
+		ImageView cardImage = (ImageView) event.getSource();
+		// Card card = 
+	}
 	public void drawCard(MouseEvent event) {
 		//TODO complete implementing this
 		//sets image of the card drawn from deck will be dynamic after full implementation

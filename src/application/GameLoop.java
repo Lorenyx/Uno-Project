@@ -8,9 +8,11 @@ public class GameLoop {
     private BoardController board;
 
     public static Card topCard;
+    private Player winner;
 
     public GameLoop(BoardController board) {
         this.board = board;
+        winner = null;
         drawPile = new Deck(); 
         drawPile.init();
         // initialize empty deck
@@ -31,6 +33,21 @@ public class GameLoop {
     }
 
     // public Deck getDeck()
+    public void cycle() {
+        
+    }
+
+    public Player getPlayer() {
+        return players[0];
+    }
+
+    public void setWinner(Player p) {
+        winner = p;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
 
     public void handCardsToPlayers() {
         // draw card from drawPile and hand to each player
