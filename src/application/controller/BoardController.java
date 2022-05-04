@@ -109,6 +109,19 @@ public class BoardController {
 		cpu3HandDisplay.getChildren().add(addedCard);
 	}
 
+	public void removeCardToCPU1() {
+		cpu1HandDisplay.getChildren().remove(0);
+		return;
+	}
+	public void removeCardToCPU2() {
+		cpu3HandDisplay.getChildren().remove(0);
+		return;
+	}
+	public void removeCardToCPU3() {
+		cpu2HandDisplay.getChildren().remove(0);
+		return;
+	}
+
 	public void setTopCardImage() {
 		Image img = new Image(getClass().getResource(Deck.topCard.toFileName()).toExternalForm());
 		topCard.setImage(img);

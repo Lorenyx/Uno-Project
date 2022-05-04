@@ -60,6 +60,17 @@ public class GameLoop {
                 prev = Deck.topCard;
             }
             System.out.println("Player"+(turnNum%4)+" played: "+Deck.topCard);
+            switch (turnNum%4) {
+                case 1:
+                    board.removeCardToCPU1();
+                break;
+                case 2:
+                    board.removeCardToCPU2();
+                break;
+                case 3:
+                    board.removeCardToCPU3();
+                break;
+            }
         }
         
     }
