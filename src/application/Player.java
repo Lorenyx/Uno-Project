@@ -19,6 +19,18 @@ public class Player{
     hand = new Deck();
   }
   
+  public void setDisplay(HBox display) {
+    displayH = display;
+    displayV = null;
+  }
+
+  public void setDisplay(VBox display) {
+    displayV = display;
+    displayH = null;
+  }
+
+  
+
   /**
     * adds specifiied card to players hand. 
     * 
