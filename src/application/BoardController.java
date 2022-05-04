@@ -127,7 +127,7 @@ public class BoardController {
 	public void addCardToCPU3() {
 		// Does not check if too many cards have been added
 		ImageView addedCard = cardToImageHidden();
-		addedCard.setRotate(-90);
+		addedCard.setRotate(-90);		
 		cpu3HandDisplay.getChildren().add(addedCard);
 	}
 

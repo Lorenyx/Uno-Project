@@ -11,156 +11,15 @@
    <children>
       <ImageView fx:id="DiscardPile" fitHeight="147.0" fitWidth="102.0" layoutX="398.0" layoutY="317.0" pickOnBounds="true">
          <image>
-            <Image url="@data/Wild/WILD.png" />
+            <Image url="@data/UNO_FRONT.png" />
          </image>
       </ImageView>
       <ImageView fx:id="deck" fitHeight="147.0" fitWidth="102.0" layoutX="286.0" layoutY="317.0" pickOnBounds="true">
          <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
+            <Image url="@data/UNO_FRONT.png" />
          </image>
       </ImageView>
       <Button fx:id="drawButton" layoutX="311.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#drawCard" text="Draw" />
-      <ImageView fx:id="card1" fitHeight="147.0" fitWidth="102.0" layoutX="162.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/RED_0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="card" fitHeight="147.0" fitWidth="102.0" layoutX="20.0" layoutY="618.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true" visible="false" />
-      <ImageView fx:id="card2" fitHeight="147.0" fitWidth="102.0" layoutX="222.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/RED_1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="card3" fitHeight="147.0" fitWidth="102.0" layoutX="282.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/Wild/WILD.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="card4" fitHeight="147.0" fitWidth="102.0" layoutX="342.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/RED_3.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="card5" fitHeight="147.0" fitWidth="102.0" layoutX="402.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/RED_4.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="card6" fitHeight="147.0" fitWidth="102.0" layoutX="462.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/RED_5.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="card7" fitHeight="147.0" fitWidth="102.0" layoutX="522.0" layoutY="609.0" onMouseEntered="#onCardHover" onMouseExited="#offCardHover" onMouseReleased="#cardDropped" pickOnBounds="true">
-         <image>
-            <Image url="@data/RED_6.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card1" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="160.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card2" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="202.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card3" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="244.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card4" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="285.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card5" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="328.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card6" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="370.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai1Card7" fitHeight="147.0" fitWidth="102.0" layoutX="43.0" layoutY="412.0" pickOnBounds="true" rotate="90.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card1" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="412.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card2" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="370.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card3" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="328.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card4" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="285.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card5" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="244.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card6" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="202.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai3Card7" fitHeight="147.0" fitWidth="102.0" layoutX="653.0" layoutY="160.0" pickOnBounds="true" rotate="270.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card1" fitHeight="147.0" fitWidth="102.0" layoutX="477.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card2" fitHeight="147.0" fitWidth="102.0" layoutX="435.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card3" fitHeight="147.0" fitWidth="102.0" layoutX="393.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card4" fitHeight="147.0" fitWidth="102.0" layoutX="351.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card5" fitHeight="147.0" fitWidth="102.0" layoutX="309.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card6" fitHeight="147.0" fitWidth="102.0" layoutX="267.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="ai2Card7" fitHeight="147.0" fitWidth="102.0" layoutX="225.0" layoutY="36.0" pickOnBounds="true" rotate="180.0">
-         <image>
-            <Image url="@data/Wild/UNO_FRONT.png" />
-         </image>
-      </ImageView>
       <Region fx:id="colorSelector" layoutX="256.0" layoutY="263.0" prefHeight="275.0" prefWidth="275.0" style="-fx-background-color: gray; -fx-opacity: .3;" visible="false" />
       <Button fx:id="redButton" layoutX="292.0" layoutY="380.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onColorButton" prefHeight="25.0" prefWidth="62.0" text="RED" visible="false" />
       <Button fx:id="blueButton" layoutX="363.0" layoutY="327.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onColorButton" prefHeight="25.0" prefWidth="62.0" text="BLUE" visible="false" />
@@ -168,8 +27,8 @@
       <Button fx:id="greenButton" layoutX="434.0" layoutY="378.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onColorButton" prefHeight="25.0" prefWidth="62.0" text="GREEN" visible="false" />
       <Button fx:id="unoButton" layoutX="369.0" layoutY="559.0" mnemonicParsing="false" onMouseClicked="#onUnoClicked" text="UNO" visible="false" />
       <HBox fx:id="playerHandDisplay" layoutX="161.0" layoutY="609.0" prefHeight="147.0" prefWidth="463.0" />
-      <HBox fx:id="cpu1HandDisplay" layoutX="48.0" layoutY="183.0" prefHeight="354.0" prefWidth="147.0" />
-      <HBox fx:id="cpu3HandDisplay" layoutX="599.0" layoutY="181.0" prefHeight="354.0" prefWidth="147.0" />
-      <HBox fx:id="cpu2HandDisplay" layoutX="170.0" layoutY="36.0" prefHeight="147.0" prefWidth="463.0" />
+      <HBox fx:id="cpu1HandDisplay" layoutX="14.0" layoutY="181.0" prefHeight="354.0" prefWidth="147.0" />
+      <HBox fx:id="cpu3HandDisplay" layoutX="652.0" layoutY="181.0" prefHeight="354.0" prefWidth="147.0" />
+      <HBox fx:id="cpu2HandDisplay" layoutX="168.0" prefHeight="147.0" prefWidth="463.0" />
    </children>
 </AnchorPane>
